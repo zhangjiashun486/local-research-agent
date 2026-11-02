@@ -1,0 +1,4 @@
+{
+  "base_url": "http://127.0.0.1:1235/v1",
+  "model": "YOUR_LOADED_MODEL_ID"
+}

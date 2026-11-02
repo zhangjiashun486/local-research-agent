@@ -1,0 +1,64 @@
+{
+  "run_at": "2026-10-18T15:46:37+00:00",
+  "base_url": "http://127.0.0.1:8799",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "健康检查 /health",
+      "ok": true,
+      "detail": "http=200"
+    },
+    {
+      "name": "首页返回 HTML",
+      "ok": true,
+      "detail": "http=200 len=25315"
+    },
+    {
+      "name": "图标 /favicon.ico",
+      "ok": true,
+      "detail": "http=200"
+    },
+    {
+      "name": "报告列表 /reports",
+      "ok": true,
+      "detail": "http=200"
+    },
+    {
+      "name": "报告详情 /reports/{id}",
+      "ok": true,
+      "detail": "http=200"
+    },
+    {
+      "name": "报告下载 /download",
+      "ok": true,
+      "detail": "http=200 len=3836"
+    },
+    {
+      "name": "质量自检 /check",
+      "ok": true,
+      "detail": "http=200"
+    },
+    {
+      "name": "未知报告返回 404",
+      "ok": true,
+      "detail": "http=404"
+    },
+    {
+      "name": "主题过短被拒（422）",
+      "ok": true,
+      "detail": "http=422"
+    },
+    {
+      "name": "轮次越界被拒（422）",
+      "ok": true,
+      "detail": "http=422"
+    },
+    {
+      "name": "来源超过 5 条被拒（422）",
+      "ok": true,
+      "detail": "http=422"
+    }
+  ]
+}
