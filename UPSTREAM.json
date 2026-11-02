@@ -1,0 +1,8 @@
+{
+  "url": "https://github.com/langchain-ai/local-deep-researcher",
+  "commit": "03537326ffa0dd90c9702bece2f3aeba5d84162a",
+  "acquired_as": "GitHub source archive (git clone failed with connection reset)",
+  "archive_sha256": "42bffca5a2435f58e08bfefb877ea7ff1305590a777503265062a12f8129bbc4",
+  "license": "MIT",
+  "date": "2026-10-13"
+}

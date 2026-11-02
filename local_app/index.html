@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>资料研究助手 · 研究工作台</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<style>
+:root{color-scheme:light;--ink:#182f36;--muted:#63777e;--accent:#167c82;--line:#dce4e7;--bg:#f3f6f7;--white:#fff;--red:#a33b37}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 "Segoe UI","Microsoft YaHei",sans-serif}button,input,textarea,select{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}button,a{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}a{color:var(--accent);text-underline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #5aafb5;outline-offset:3px}[hidden]{display:none!important}
+.topbar{height:80px;background:var(--white);border-bottom:1px solid var(--line)}.top-inner{max-width:1456px;height:100%;margin:auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:13px}.brand img{width:38px;height:38px}.brand-name{font-size:20px;font-weight:700;letter-spacing:.02em}.brand-caption{font-size:12px;color:var(--muted);margin-top:1px}.top-right{display:flex;align-items:center;gap:25px}.connection{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9aa8ac;flex:none}.dot.ok{background:var(--accent)}.dot.bad{background:var(--red)}.quiet{border:1px solid var(--line);border-radius:6px;background:var(--white);padding:8px 13px;color:var(--ink);text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:7px;font-size:13px}.quiet:hover{border-color:#a4b8be;background:#f6f9fa}.top-help{position:relative;color:var(--muted);font-size:13px}.top-help summary{cursor:pointer}.top-help p{position:absolute;right:0;top:22px;width:280px;margin:0;padding:18px;z-index:5;background:white;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 30px #182f3612;line-height:1.8}
+.page{max-width:1456px;margin:0 auto;padding:30px 40px 24px}.page-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:23px}.page-heading h1{font-size:26px;letter-spacing:-.03em;margin:0 0 4px;font-weight:650}.page-heading p{margin:0;color:var(--muted);font-size:13px}.workspace{display:grid;grid-template-columns:340px minmax(0,1fr);gap:28px;align-items:start}.sidebar{min-width:0}.task{background:white;border:1px solid var(--line);border-radius:10px;padding:24px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:21px}.section-head h2{font-size:16px;margin:0;font-weight:650}.text-button{background:none;border:0;padding:3px 0;color:var(--accent);font-size:12px}.text-button:hover{text-decoration:underline}fieldset{padding:0;margin:0;border:0;min-width:0}label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}.field-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.field-head span{font-size:11px;color:var(--muted)}textarea{width:100%;resize:vertical;min-height:86px;padding:12px 13px;background:#fbfcfc;border:1px solid #ccd9dd;border-radius:6px;line-height:1.7;color:var(--ink)}textarea:focus{border-color:var(--accent);background:white}#topic{min-height:91px}#sources{min-height:143px;font-size:12px;overflow-wrap:anywhere}textarea::placeholder{color:#8b9ca2}.field-help{font-size:11px;color:var(--muted);line-height:1.7;margin:7px 0 21px}.primary{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:6px;padding:12px 16px;background:var(--accent);color:white;font-weight:600;font-size:14px}.primary:hover{background:#11686e}.primary svg{width:17px;height:17px}.scope-note{display:flex;align-items:flex-start;gap:7px;margin:12px 0 0;font-size:11px;color:var(--muted)}.scope-note svg{flex:none;width:14px;height:14px;margin-top:2px}.field-error{color:var(--red);font-size:12px;margin:0 0 12px}
+.history{margin-top:28px}.history .section-head{margin:0 0 12px;padding:0 2px}.history-count{font-size:12px;color:var(--muted);font-weight:400;margin-left:7px}.filters{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:5px}.filter{border:0;background:transparent;font-size:12px;color:var(--muted);padding:5px 11px;border-radius:4px}.filter[aria-pressed=true]{color:var(--accent);background:#e2eff0;font-weight:600}.history-list{max-height:435px;overflow-y:auto;padding-right:3px;scrollbar-width:thin;scrollbar-color:#cbd7da transparent}.history-item{display:block;width:100%;text-align:left;border:1px solid transparent;background:transparent;padding:13px 11px;margin:3px 0;border-radius:6px;color:var(--ink)}.history-item:hover{background:#eaf0f2}.history-item[aria-current=true]{background:white;border-color:#b8d6d8}.history-title{font-size:12px;font-weight:500;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}.history-meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:10px;margin-top:6px}.history-state{display:flex;align-items:center;gap:5px}.history-state .dot{width:5px;height:5px}.history-message{color:var(--muted);font-size:12px;padding:20px 8px;line-height:1.8}
+.paper{min-width:0;background:white;border:1px solid var(--line);border-radius:10px;min-height:740px;overflow:hidden;box-shadow:0 5px 20px #182f3604}.paper-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 28px;border-bottom:1px solid #e9edef}.paper-label{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}.paper-label svg{width:17px;height:17px}.paper-actions{display:flex;gap:8px}.paper-actions .quiet{padding:6px 11px;font-size:12px}.paper-inner{padding:35px 40px 40px}.report-meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:11px;color:var(--muted);margin-bottom:16px}.status{font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px}.status.failure{color:var(--red)}.report-heading{font-size:27px;line-height:1.4;letter-spacing:-.025em;margin:0 0 26px;font-weight:650;overflow-wrap:anywhere}.report-body{font-size:15px;line-height:1.85;color:#344b53;overflow-wrap:anywhere}.report-body p{margin:0 0 18px}.report-body h2,.report-body h3,.report-body h4{color:var(--ink);line-height:1.45;margin:28px 0 12px;font-weight:650}.report-body h2{font-size:20px;border-bottom:1px solid #e8edef;padding-bottom:9px}.report-body h3{font-size:17px}.report-body h4{font-size:15px}.report-body h2:first-child,.report-body h3:first-child{margin-top:0}.report-body ul,.report-body ol{padding-left:23px;margin:12px 0 20px}.report-body li{padding-left:3px;margin-bottom:7px}.report-body code{font-family:Consolas,"Courier New",monospace;font-size:.88em;background:#edf3f4;padding:2px 5px;border-radius:3px;color:#28545c}.report-body pre{overflow:auto;background:#f3f6f7;padding:16px;border:1px solid #e3eaed;border-radius:6px;line-height:1.7;white-space:pre}.report-body pre code{background:none;padding:0}.report-body blockquote{border-left:3px solid #90bdc0;margin:18px 0;padding-left:18px;color:var(--muted)}.report-body a{word-break:break-word}.report-body hr{border:0;border-top:1px solid var(--line);margin:25px 0}.report-foot{font-size:11px;color:var(--muted);border-top:1px solid #e8edef;margin:28px 0 0;padding-top:15px}.empty{min-height:520px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:45px 15px;color:var(--muted)}.empty svg{width:76px;height:88px;margin-bottom:24px;color:#9bb7bd}.empty h2{font-size:20px;color:var(--ink);margin:0 0 11px;font-weight:600}.empty p{font-size:13px;max-width:310px;margin:0;line-height:1.9}.empty .empty-hint{font-size:11px;color:#8c9da3;margin-top:24px}.busy-message{display:flex;align-items:center;gap:8px;color:var(--accent);font-size:12px;margin-bottom:17px;line-height:1.7}.spinner{display:inline-block;width:15px;height:15px;border:2px solid #c7dfe1;border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;flex:none}@keyframes spin{to{transform:rotate(360deg)}}.error-box{padding:18px 20px;background:#fcf3f1;border:1px solid #eed7d2;border-radius:6px;color:#893c37;font-size:13px;line-height:1.8;margin-bottom:20px;overflow-wrap:anywhere}.error-box strong{display:block;margin-bottom:5px}.error-box p{margin:0;white-space:pre-wrap}.site-footer{display:flex;justify-content:space-between;gap:15px;padding:22px 2px 0;color:#7b8e96;font-size:11px}.feedback{min-height:20px;font-size:11px;color:var(--muted);text-align:right;padding:0 28px}
+@media(min-width:1600px){.paper-inner{padding-left:54px;padding-right:54px}.report-body{font-size:16px}}
+@media(max-width:1050px){.top-inner{padding:0 24px}.page{padding:25px 24px}.workspace{grid-template-columns:305px minmax(0,1fr);gap:20px}.task{padding:20px}.paper-inner{padding:27px}.paper-toolbar{padding:16px 22px}.report-heading{font-size:23px}.top-help{display:none}}
+@media(max-width:760px){.topbar{height:70px}.top-inner{padding:0 18px}.brand-name{font-size:17px}.top-right{gap:0}.connection{font-size:11px}.brand-caption{font-size:10px}.page{padding:22px 16px}.page-heading{align-items:start}.page-heading h1{font-size:23px}.page-heading p{max-width:240px;font-size:12px}.page-heading>.quiet{white-space:nowrap;padding:7px 10px;font-size:11px}.workspace{display:flex;flex-direction:column;gap:22px}.sidebar{display:contents}.task{width:100%;order:1}.paper{width:100%;min-height:430px;order:2}.history{width:100%;order:3;margin-top:0}.history-list{max-height:320px}.paper-inner{padding:24px 21px}.paper-toolbar{padding:14px 18px;gap:8px}.paper-actions{gap:6px}.paper-actions .quiet{padding:6px 8px;font-size:11px}.paper-label{font-size:12px}.report-heading{font-size:22px}.report-body{font-size:14px}.report-meta{font-size:10px;gap:6px 12px}.empty{min-height:340px;padding:30px 0}.site-footer{font-size:10px;flex-direction:column;gap:5px}.feedback{padding:0 18px}}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="top-inner">
+  <div class="brand"><img src="/favicon.ico" alt="" width="38" height="38"><div><div class="brand-name">资料研究助手</div><div class="brand-caption">让资料成为有出处的答案</div></div></div>
+  <div class="top-right"><select id="language" class="quiet" aria-label="界面及新报告语言"><option value="zh">中文</option><option value="en">English</option></select><details class="top-help"><summary>使用说明</summary><p>填写研究主题，添加1至5个HTTPS资料链接，再开始研究。完成后可以阅读、复制或下载报告。历史记录保存在本机。</p></details><span class="connection"><span id="connection-dot" class="dot"></span><span id="connection-text">检查应用连接</span></span></div>
+</div></header>
+<main class="page">
+  <div class="page-heading"><div><h1>研究工作台</h1><p>从几份资料出发，整理思路、提炼内容，保留来源。</p></div><button id="new-research" class="quiet" type="button"><span aria-hidden="true">＋</span> 新建研究</button></div>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="研究任务与历史">
+      <form id="research-form" class="task">
+        <div class="section-head"><h2>开始一项研究</h2><button id="example" type="button" class="text-button">填入示例</button></div>
+        <fieldset id="research-fields">
+          <label for="topic">你想研究什么？</label>
+          <textarea id="topic" name="topic" minlength="3" maxlength="300" required placeholder="写下一个具体问题，例如：Python类型标注与运行时校验有什么区别？">How Python type annotations differ from runtime validation</textarea>
+          <p class="field-help">具体的问题，更容易得到有用的资料总结。</p>
+          <div class="field-head"><label for="sources">参考资料</label><span id="source-count">2 / 5</span></div>
+          <textarea id="sources" name="sources" required spellcheck="false" aria-describedby="sources-help" placeholder="https://example.com/article&#10;每行一个HTTPS链接">https://docs.python.org/3/library/typing.html
+https://docs.python.org/3/library/dataclasses.html</textarea>
+          <p id="sources-help" class="field-help">每行一个HTTPS网址，最多5个。当前根据指定网页研究。</p>
+          <label for="reader-mode">资料读取方式</label>
+          <select id="reader-mode" class="quiet" aria-describedby="reader-help" style="width:100%;margin-bottom:7px"><option value="direct">程序直接读取</option><option value="agent">模型调用网页工具</option></select>
+          <p id="reader-help" class="field-help">直接读取适合已选好的资料；模型读取会按主题调用工具，挑选长文摘录。</p>
+          <p id="form-error" class="field-error" role="alert" hidden></p>
+          <button id="run" type="submit" class="primary"><span id="run-text">开始研究</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 5l7 7-7 7"/></svg></button>
+        </fieldset>
+        <p class="scope-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg><span>使用本地模型生成；资料网页仍需联网访问。</span></p>
+      </form>
+      <section class="history" aria-labelledby="history-heading">
+        <div class="section-head"><h2 id="history-heading">研究记录<span id="history-count" class="history-count"></span></h2><button id="refresh-history" type="button" class="text-button">刷新</button></div>
+        <div class="filters" aria-label="筛选研究记录"><button type="button" class="filter" data-filter="all" aria-pressed="true">全部</button><button type="button" class="filter" data-filter="completed" aria-pressed="false">已完成</button><button type="button" class="filter" data-filter="failed" aria-pressed="false">未完成</button></div>
+        <div id="history" class="history-list" aria-live="polite"><p class="history-message">正在读取本机记录…</p></div>
+      </section>
+    </aside>
+    <section class="paper" aria-label="研究报告" aria-busy="false">
+      <div class="paper-toolbar"><span class="paper-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H6v18h12V7zM14 3v5h5M9 12h6M9 16h6"/></svg>研究报告</span><div class="paper-actions"><button id="copy-report" type="button" class="quiet" disabled>复制报告</button><a id="download-report" class="quiet" hidden>下载 Markdown</a></div></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      <div class="paper-inner">
+        <div id="busy-status" class="busy-message" role="status" hidden><span class="spinner" aria-hidden="true"></span><span id="busy-text">正在准备研究…</span></div>
+        <div id="report-meta" class="report-meta" hidden></div>
+        <h2 id="report-title" class="report-heading" hidden></h2>
+        <div id="error-box" class="error-box" role="alert" hidden><strong id="error-title">本次研究未完成</strong><p id="error-detail"></p></div>
+        <div id="empty" class="empty"><svg viewBox="0 0 80 96" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 4h34l17 17v67H16z"/><path d="M50 4v18h17M27 38h28M27 49h24M27 60h15"/><circle cx="55" cy="70" r="12" fill="white"/><path d="M64 79l10 11" stroke-width="3"/></svg><h2>你的下一份研究，从这里开始</h2><p>填写左侧的主题与资料链接，或选一份历史报告继续阅读。</p><p class="empty-hint">报告会保留来源，并自动保存到本机。</p></div>
+        <article id="report" class="report-body" aria-label="报告正文" hidden></article>
+        <details id="source-evidence" hidden style="margin-top:24px"><summary style="cursor:pointer">资料读取记录与原文摘录</summary><div id="source-evidence-content" class="report-body" style="font-size:12px;margin-top:12px"></div></details>
+        <p id="report-foot" class="report-foot" hidden>由本地模型整理。引用便于回查资料，使用前请核对关键事实。</p>
+      </div>
+    </section>
+  </div>
+  <footer class="site-footer"><span>资料研究助手 · 本地工作台</span><span>指定来源研究 / 本机历史保存 / Markdown导出</span></footer>
+</main>
+<script src="/i18n.js"></script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const i18n=window.ResearchI18n, t=i18n.t;
+const exampleSources=$('sources').value;
+i18n.apply(i18n.language);$('language').value=i18n.language;$('topic').value=t('exampleTopic');
+let records=[],selectedId=null,filter='all',busy=false,currentReport=null,loadVersion=0;
+const statusLabel=status=>['completed','failed','empty'].includes(status)?t(status):status;
+let feedbackState=null,errorState=null,formError=null,historyError='',connectionState=null;
+function node(tag,text,className){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;}
+function safeUrl(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:null;}catch{return null;}}
+function inline(parent,text){
+  const regex=/(`[^`]+`|\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s<>]+)/g;let cursor=0;
+  for(const m of text.matchAll(regex)){
+    parent.append(document.createTextNode(text.slice(cursor,m.index)));const token=m[0];
+    if(token.startsWith('`'))parent.append(node('code',token.slice(1,-1)));
+    else if(token.startsWith('**'))parent.append(node('strong',token.slice(2,-2)));
+    else {const link=token.startsWith('[')?token.match(/^\[([^\]]+)\]\((.+)\)$/):null;const raw=link?link[2]:token;const href=safeUrl(raw);if(href){const a=node('a',link?link[1]:token);a.href=href;a.target='_blank';a.rel='noopener noreferrer';parent.append(a);}else parent.append(document.createTextNode(token));}
+    cursor=m.index+token.length;
+  }
+  parent.append(document.createTextNode(text.slice(cursor)));
+}
+function renderMarkdown(target,text){
+  target.replaceChildren();const lines=text.replace(/\r\n/g,'\n').split('\n');let i=0;
+  while(i<lines.length){let line=lines[i];if(!line.trim()){i++;continue;}
+    if(/^\s*```/.test(line)){const pre=node('pre'),code=node('code');const codeLines=[];i++;while(i<lines.length&&!/^\s*```/.test(lines[i]))codeLines.push(lines[i++]);code.textContent=codeLines.join('\n');pre.append(code);target.append(pre);if(i<lines.length)i++;continue;}
+    const heading=line.match(/^\s{0,3}(#{1,6})\s+(.+)$/);if(heading){const h=node('h'+Math.min(4,Math.max(2,heading[1].length)));inline(h,heading[2]);target.append(h);i++;continue;}
+    if(/^\s*([-*_])(?:\s*\1){2,}\s*$/.test(line)){target.append(node('hr'));i++;continue;}
+    const item=line.match(/^\s*(?:[-*+]\s+|\d+\.\s+)(.+)$/);if(item){const ordered=/^\s*\d+\./.test(line);const list=node(ordered?'ol':'ul');while(i<lines.length){const match=lines[i].match(ordered?/^\s*\d+\.\s+(.+)$/:/^\s*[-*+]\s+(.+)$/);if(!match)break;const li=node('li');inline(li,match[1]);list.append(li);i++;}target.append(list);continue;}
+    if(/^\s*>/.test(line)){const q=node('blockquote');const parts=[];while(i<lines.length&&/^\s*>/.test(lines[i]))parts.push(lines[i++].replace(/^\s*>\s?/,''));inline(q,parts.join(' '));target.append(q);continue;}
+    const paragraph=node('p');const parts=[line];i++;while(i<lines.length&&lines[i].trim()&&!/^\s*(#{1,6}\s|```|[-*+]\s|\d+\.\s|>)/.test(lines[i]))parts.push(lines[i++]);inline(paragraph,parts.join(' '));target.append(paragraph);
+  }
+}
+function dateLabel(value){const d=new Date(value);return Number.isNaN(d.getTime())?t('unknownTime'):d.toLocaleString(i18n.language==='zh'?'zh-CN':'en-GB',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false});}
+function errorText(error){return error?.httpStatus?error.serverDetail||t('requestFailed',{status:error.httpStatus}):error?.message||String(error||'');}
+function renderError(){if(!errorState){$('error-box').hidden=true;return;}$('error-title').textContent=t(errorState.key);$('error-detail').textContent=errorState.detailKey?t(errorState.detailKey):errorText(errorState.detail);$('error-box').hidden=false;}
+function setError(key,detail='',detailKey=null){errorState={key,detail,detailKey};renderError();}
+function feedback(key,args={}){feedbackState=key?{key,args}:null;$('feedback').textContent=key?t(key,Object.fromEntries(Object.entries(args).map(([k,v])=>[k,v instanceof Error?errorText(v):v]))):'';}
+function clearFeedback(){feedback(null);}
+function renderHistory(){
+  const list=$('history');list.replaceChildren();$('history-count').textContent=records.length?'('+records.length+')':'';
+  if(historyError){list.append(node('p',t('historyFailed',{message:errorText(historyError)}),'history-message'));return;}
+  const rows=records.filter(r=>filter==='all'||(filter==='completed'?r.status==='completed':r.status!=='completed'));
+  if(!rows.length){list.append(node('p',t(records.length?'noCategory':'noHistory'),'history-message'));return;}
+  for(const r of rows){const button=node('button',undefined,'history-item');button.type='button';button.dataset.reportId=r.id;button.disabled=busy;button.setAttribute('aria-current',String(r.id===selectedId));button.append(node('span',r.topic,'history-title'));const meta=node('span',undefined,'history-meta');meta.append(node('span',dateLabel(r.created_at)));const status=node('span',undefined,'history-state');status.append(node('span',undefined,'dot '+(r.status==='completed'?'ok':'bad')),document.createTextNode(statusLabel(r.status)));meta.append(status);button.append(meta);button.addEventListener('click',()=>openReport(r.id));list.append(button);}
+}
+function renderEvidence(data){
+  const target=$('source-evidence-content');target.replaceChildren();
+  const excerpts=Array.isArray(data.source_excerpts)?data.source_excerpts:[],trace=Array.isArray(data.tool_trace)?data.tool_trace:[];
+  $('source-evidence').hidden=!excerpts.length&&!trace.length;
+  if(Number.isFinite(data.model_calls))target.append(node('p',t('readingStats',{calls:data.model_calls,chars:data.context_chars||0})));
+  for(const event of trace){const status=['success','empty','error','rejected','cached'].includes(event.status)?t('tool_'+event.status):event.status;target.append(node('p',(event.tool||'read_webpage')+' · '+status+(event.url?' · '+event.url:'')+(event.error?' · '+event.error:'')));}
+  for(const source of excerpts){const p=node('p'),href=safeUrl(source.url);if(href){const a=node('a',(source.source_id?'['+source.source_id+'] ':'')+(source.title||source.url));a.href=href;a.target='_blank';a.rel='noopener noreferrer';p.append(a);}else p.textContent=source.title||'';target.append(p,node('pre',String(source.content||'').slice(0,4000)));}
+}
+function showReport(data){
+  currentReport=data;selectedId=data.id;clearFeedback();$('empty').hidden=true;$('report-title').hidden=false;$('report-title').textContent=data.topic;
+  const meta=$('report-meta');meta.replaceChildren();meta.hidden=false;const success=data.status==='completed';const status=node('span',statusLabel(data.status),'status'+(success?'':' failure'));status.append(node('span',undefined,'dot '+(success?'ok':'bad')));meta.append(status,node('span',dateLabel(data.created_at)),node('span',t('loops',{count:data.actual_loops})));if(Number.isFinite(data.seconds))meta.append(node('span',t('seconds',{count:data.seconds})));
+  meta.append(node('span',t('language',{name:data.language==='zh'?'中文':data.language==='en'?'English':t('unknownLanguage')})));
+  meta.append(node('span',t('readerMode',{name:data.reader_mode==='agent'?t('agentMode'):data.reader_mode==='direct'?t('directMode'):t('unknownLanguage')})));
+  renderEvidence(data);
+  errorState=null;renderError();if(!success)setError('notCompleted',data.error||'',data.error?null:'noSources');
+  $('report').hidden=!data.report;if(data.report)renderMarkdown($('report'),data.report);else $('report').replaceChildren();$('report-foot').hidden=!data.report;
+  $('copy-report').disabled=!data.report;const download=$('download-report');download.hidden=!data.report;if(data.report){download.href='/reports/'+encodeURIComponent(data.id)+'/download';download.download=t('downloadPrefix')+'-'+data.id.slice(0,8)+'.md';}else download.removeAttribute('href');renderHistory();
+}
+async function readResponse(response){if(!response.ok){let detail='';try{const data=await response.json();detail=typeof data.detail==='string'?data.detail:'';}catch{}const error=Error(detail);error.httpStatus=response.status;error.serverDetail=detail;throw error;}return response.json();}
+async function openReport(id){
+  if(busy)return;const version=++loadVersion;feedback('loadingReport');
+  try{const data=await readResponse(await fetch('/reports/'+encodeURIComponent(id)));if(version!==loadVersion)return;showReport(data);}catch(e){if(version===loadVersion)feedback('readFailed',{message:e});}
+}
+async function refreshHistory(initial=false){
+  $('refresh-history').disabled=true;
+  try{records=await readResponse(await fetch('/reports'));historyError='';renderHistory();if(initial&&!busy&&!currentReport&&!$('topic').matches(':focus')){const latest=records.find(r=>r.status==='completed');if(latest)await openReport(latest.id);}}
+  catch(e){historyError=e;renderHistory();}
+  finally{$('refresh-history').disabled=busy;}
+}
+function countSources(){const count=$('sources').value.split(/\n/).filter(s=>s.trim()).length;$('source-count').textContent=count+' / 5';$('source-count').style.color=count>5?'var(--red)':'';$('sources').setCustomValidity('');formError=null;$('form-error').hidden=true;}
+function resetView(){++loadVersion;selectedId=null;currentReport=null;errorState=null;clearFeedback();$('empty').hidden=false;for(const id of ['report-title','report-meta','error-box','report','report-foot','source-evidence'])$(id).hidden=true;$('copy-report').disabled=true;$('download-report').hidden=true;renderHistory();}
+function setBusy(value){busy=value;$('language').disabled=value;document.querySelector('.paper').setAttribute('aria-busy',String(value));$('research-fields').disabled=value;$('example').disabled=value;$('new-research').disabled=value;$('refresh-history').disabled=value;$('run-text').textContent=t(value?'running':'start');$('busy-status').hidden=!value;renderHistory();}
+$('research-form').addEventListener('submit',async event=>{
+  event.preventDefault();if(busy)return;const topic=$('topic').value.trim();const urls=$('sources').value.split(/\n/).map(s=>s.trim()).filter(Boolean);
+  let error='';if(topic.length<3)error='topicError';else if(!urls.length||urls.length>5)error='sourcesError';else if(urls.some(s=>{try{const u=new URL(s);return u.protocol!=='https:'||!u.hostname;}catch{return true;}}))error='urlError';
+  if(error){formError=error;$('form-error').textContent=t(error);$('form-error').hidden=false;return;}
+  resetView();$('empty').hidden=true;$('report-title').hidden=false;$('report-title').textContent=topic;setBusy(true);const started=Date.now();$('busy-text').textContent=t('waiting');const timer=setInterval(()=>{$('busy-text').textContent=t('elapsed',{count:Math.floor((Date.now()-started)/1000)});},1000);
+  try{const data=await readResponse(await fetch('/research',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic,loops:1,source_urls:urls,language:i18n.language,reader_mode:$('reader-mode').value})}));showReport(data);await refreshHistory();}
+  catch(e){setError('couldNotComplete',e);feedback('checkServices');}
+  finally{clearInterval(timer);setBusy(false);}
+});
+$('sources').addEventListener('input',countSources);$('topic').addEventListener('input',()=>{formError=null;$('form-error').hidden=true;});
+$('example').addEventListener('click',()=>{$('topic').value=t('exampleTopic');$('sources').value=exampleSources;countSources();$('topic').focus();});
+$('new-research').addEventListener('click',()=>{if(busy)return;resetView();$('topic').value='';$('sources').value='';countSources();$('topic').focus();});
+$('refresh-history').addEventListener('click',()=>refreshHistory());
+document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter;document.querySelectorAll('.filter').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderHistory();}));
+$('copy-report').addEventListener('click',async()=>{if(!currentReport?.report)return;try{await navigator.clipboard.writeText(currentReport.report);feedback('copied');}catch{feedback('copyDenied');}});
+function renderConnection(){$('connection-text').textContent=t(connectionState===null?'checking':connectionState?'online':'offline');}
+$('language').addEventListener('change',()=>{
+  if(busy){$('language').value=i18n.language;return;}
+  const savedError=errorState,savedFeedback=feedbackState;
+  i18n.apply($('language').value);
+  if(currentReport)showReport(currentReport);else renderHistory();
+  errorState=savedError;renderError();if(savedFeedback)feedback(savedFeedback.key,savedFeedback.args);
+  if(formError){$('form-error').textContent=t(formError);$('form-error').hidden=false;}
+  $('run-text').textContent=t('start');renderConnection();
+});
+fetch('/health').then(readResponse).then(data=>{if(data.status!=='ok')throw Error();connectionState=true;$('connection-dot').classList.add('ok');renderConnection();}).catch(()=>{connectionState=false;$('connection-dot').classList.add('bad');renderConnection();});
+countSources();refreshHistory(true);
+</script>
+</body>
+</html>
